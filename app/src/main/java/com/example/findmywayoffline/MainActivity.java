@@ -5,9 +5,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -15,57 +18,141 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
-    private static final int PERMISSION_REQUEST_CODE = 1;
+    Button btnSent, btnInbox, btnDraft;
+    TextView lblMsg, lblNo;
+    ListView lvMsg;
+    int val = 1;
+    // Cursor Adapter
+    SimpleCursorAdapter adapter;
 
+    /** Called when the activity is first created. */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final EditText source = findViewById(R.id.source);
-        final EditText dest = findViewById(R.id.dest);
-        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
-
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 1);
-        } else {
-            //TODO
-        }
-
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-
-            if (checkSelfPermission(Manifest.permission.SEND_SMS)
-                    == PackageManager.PERMISSION_DENIED) {
-
-                Log.d("permission", "permission denied to SEND_SMS - requesting it");
-                String[] permissions = {Manifest.permission.SEND_SMS};
-
-                requestPermissions(permissions, PERMISSION_REQUEST_CODE);
-
+        if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED)
+        {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
+                    Manifest.permission.READ_SMS))
+            {
+                ActivityCompat.requestPermissions(MainActivity.this,
+                        new String[] {Manifest.permission.READ_SMS}, 1);
             }
+            else
+            {
+                ActivityCompat.requestPermissions(MainActivity.this,
+                        new String[] {Manifest.permission.READ_SMS}, 1);
+            }
+
+        }
+        else
+        {
+            /* do nothing */
+            /* permission is granted */
         }
 
-        final EditText phonenum = findViewById(R.id.Phonenum);
-        Button submit = findViewById(R.id.Submit);
-        final String smsNumber = "9870053278";
-        submit.setOnClickListener(new View.OnClickListener() {
+        // Init GUI Widget
+
+        btnSent = (Button) findViewById(R.id.btnSentBox);
+        btnSent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNo = "+91" + phonenum.getText().toString().trim();
-                String message = source.getText().toString().trim() + " " + dest.getText().toString().trim();
+                val = 1;
 
-                Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                PendingIntent pi=PendingIntent.getActivity(getApplicationContext(), 0, intent,0);
-
-//Get the SmsManager instance and call the sendTextMessage method to send message
-                SmsManager sms=SmsManager.getDefault();
-                sms.sendTextMessage(phoneNo, null, message, pi,null);
+                onClicker(view);
             }
         });
+
+        btnDraft = (Button) findViewById(R.id.btnDraft);
+        btnDraft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                val=2;
+                onClicker(view);
+            }
+        });
+
+        lvMsg = (ListView) findViewById(R.id.lvMsg);
+
+    }
+    public void onClicker(View v) {
+
+        if (val == 1) {
+
+            // Create Inbox box URI
+            Uri inboxURI = Uri.parse("content://sms/inbox");
+
+            // List required columns
+            String[] reqCols = new String[] { "_id", "address", "body" };
+
+            // Get Content Resolver object, which will deal with Content
+            // Provider
+            ContentResolver cr = getContentResolver();
+
+            // Fetch Inbox SMS Message from Built-in Content Provider
+            Cursor c = cr.query(inboxURI, reqCols, null, null, null);
+
+            // Attached Cursor with adapter and display in listview
+            adapter = new SimpleCursorAdapter(this, R.layout.row, c,
+                    new String[] { "body", "address" }, new int[] {
+                    R.id.lblMsg, R.id.lblNumber });
+            lvMsg.setAdapter(adapter);
+
+        }
+
+        if (val == 2) {
+
+            // Create Sent box URI
+            Uri sentURI = Uri.parse("content://sms/sent");
+
+            // List required columns
+            String[] reqCols = new String[] { "_id", "address", "body" };
+
+            // Get Content Resolver object, which will deal with Content
+            // Provider
+            ContentResolver cr = getContentResolver();
+
+            // Fetch Sent SMS Message from Built-in Content Provider
+            Cursor c = cr.query(sentURI, reqCols, null, null, null);
+
+            // Attached Cursor with adapter and display in listview
+            adapter = new SimpleCursorAdapter(this, R.layout.row, c,
+                    new String[] { "body", "address" }, new int[] {
+                    R.id.lblMsg, R.id.lblNumber });
+            lvMsg.setAdapter(adapter);
+
+        }
+
+        if (val == 3) {
+            // Create Draft box URI
+            Uri draftURI = Uri.parse("content://sms/draft");
+
+            // List required columns
+            String[] reqCols = new String[] { "_id", "address", "body" };
+
+            // Get Content Resolver object, which will deal with Content
+            // Provider
+            ContentResolver cr = getContentResolver();
+
+            // Fetch Sent SMS Message from Built-in Content Provider
+            Cursor c = cr.query(draftURI, reqCols, null, null, null);
+
+            // Attached Cursor with adapter and display in listview
+            adapter = new SimpleCursorAdapter(this, R.layout.row, c,
+                    new String[] { "body", "address" }, new int[] {
+                    R.id.lblMsg, R.id.lblNumber });
+            lvMsg.setAdapter(adapter);
+
+        }
+
     }
 }
