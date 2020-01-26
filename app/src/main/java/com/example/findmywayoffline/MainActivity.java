@@ -27,7 +27,10 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainActivity extends Activity {
 
@@ -130,7 +133,8 @@ public class MainActivity extends Activity {
 
                 if(body.trim().contains("Please send me directions from "))
                 {
-                    String tm = "2:30";
+                    String timeStamp = new SimpleDateFormat("yyyy.MM.dd HH.mm.ss").format(new Date());
+                    String tm = timeStamp;
                     String longi = "2";
                     String lat = "2";
                     UserDetails temp = new UserDetails(lat,longi,tm,body,address);
@@ -181,7 +185,8 @@ public class MainActivity extends Activity {
 //                long id = c.getLong(index);
                 if(body.trim().contains("Please send me directions from "))
                 {
-                    String tm = "2:30";
+                    String timeStamp = new SimpleDateFormat("yyyy.MM.dd HH.mm.ss").format(new Date());
+                    String tm = timeStamp;
                     String longi = "2";
                     String lat = "2";
                     UserDetails temp = new UserDetails(lat,longi,tm,body,address);
@@ -231,7 +236,8 @@ public class MainActivity extends Activity {
 //                long id = c.getLong(index);
                 if(body.trim().contains("Please send me directions from "))
                 {
-                    String tm = "2:30";
+                    String timeStamp = new SimpleDateFormat("yyyy.MM.dd HH.mm.ss").format(new Date());
+                    String tm = timeStamp;
                     String longi = "2";
                     String lat = "2";
                     UserDetails temp = new UserDetails(lat,longi,tm,body,address);
