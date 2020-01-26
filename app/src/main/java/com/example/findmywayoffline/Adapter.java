@@ -52,6 +52,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
                i.putExtra("Longi",detail.getLongi());
                i.putExtra("TS",detail.getTimest());
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                 mContext.startActivity(i);
             }
         });
