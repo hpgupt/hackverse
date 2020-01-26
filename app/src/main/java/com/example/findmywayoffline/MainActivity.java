@@ -184,7 +184,7 @@ public class MainActivity extends Activity {
 
 //                index = c.getColumnIndexOrThrow("id");
 //                long id = c.getLong(index);
-                if(body.trim().contains("Addr: "))
+                if(body.trim().contains("Please send me "))
                 {
                     String timeStamp = new SimpleDateFormat("yyyy.MM.dd HH.mm.ss").format(new Date());
                     String tm = timeStamp;

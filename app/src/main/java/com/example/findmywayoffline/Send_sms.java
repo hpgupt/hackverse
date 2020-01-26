@@ -67,7 +67,7 @@ public class Send_sms extends AppCompatActivity {
 
         final EditText phonenum = findViewById(R.id.Phonenum);
         Button submit = findViewById(R.id.Submit);
-        final String smsNumber = "9870053278";
+        //final String smsNumber = "9870053278";
         Button msg = findViewById(R.id.Msg);
         msg.setOnClickListener(new View.OnClickListener() {
             @Override

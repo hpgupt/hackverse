@@ -51,7 +51,7 @@ public class HelpDetail extends AppCompatActivity {
         getgps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "https://immense-sierra-43855.herokuapp.com/send?msg="+body.substring(31);
+                String url = "https://immense-sierra-43855.herokuapp.com/send?msg="+body.substring(31)+"-laptop";
 
                 Log.d("URL",url);
 
@@ -86,27 +86,23 @@ Log.d("POST",response);
 
                             Log.d("ANS",dir);
 
-                            String indi[] = dir.split("::");
+                            String indi[] = {dir};
                             Log.d("SIZE",String.valueOf(indi.length));
 
                             int charlen = 0;
 
                             int k=0;
 
-                            String sms_res = "Addr: ";
-                            while(k<indi.length-1) {
+                            int len = dir.length();
 
-
-                                int i = k;
-                                for (i = k; i < indi.length; i++) {
-
-                                    charlen += indi[i].length();
-                                    if (charlen >= 150) {
-                                        charlen -= indi[i].length();
-                                        //i--;
-                                       // Log.d("SMS1",sms_res);
+                            int lo = len/155;
+                            int mo = len-lo*155;
+                            String sms_res = "";
+                            //int k =0;
+                            while(k<lo) {
+                                    sms_res = "";
                                         String phoneNo = phone.trim();
-
+                                sms_res += dir.substring(k*155,(k+1)*155);
 
                                         Intent intent=new Intent(getApplicationContext(),Send_sms.class);
                                         PendingIntent pi=PendingIntent.getActivity(getApplicationContext(), 0, intent,0);
@@ -114,35 +110,25 @@ Log.d("POST",response);
 //Get the SmsManager instance and call the sendTextMessage method to send message
                                         SmsManager sms=SmsManager.getDefault();
                                         sms.sendTextMessage(phoneNo, null, sms_res, pi,null);
-                                        break;
+                                        k++;
+
+
                                     }
-                                    sms_res += indi[i]+"\n";
-                                    charlen++;
 
-                                    if(i==indi.length-1){
-                                        String phoneNo = phone.trim();
+                                    sms_res = "";
+                            String phoneNo = phone.trim();
+                            sms_res += dir.substring(k*155,dir.length()-1);
 
-
-                                        Intent intent=new Intent(getApplicationContext(),Send_sms.class);
-                                        PendingIntent pi=PendingIntent.getActivity(getApplicationContext(), 0, intent,0);
+                            Intent intent=new Intent(getApplicationContext(),Send_sms.class);
+                            PendingIntent pi=PendingIntent.getActivity(getApplicationContext(), 0, intent,0);
 
 //Get the SmsManager instance and call the sendTextMessage method to send message
-                                        SmsManager sms=SmsManager.getDefault();
-                                        sms.sendTextMessage(phoneNo, null, sms_res, pi,null);
-                                    }
+                            SmsManager sms=SmsManager.getDefault();
+                            sms.sendTextMessage(phoneNo, null, sms_res, pi,null);
 
-                                    Log.d("DEBUG",sms_res);
-                                }
-                                //Log.d("SMS",sms_res);
+
+                            //Log.d("SMS",sms_res);
                                 //SEND SMS
-
-
-                                sms_res = "Addr: ";
-                                //int j;
-                                charlen = 0;
-
-                                k = i;
-                            }
 
                         } catch (Exception e) {
                             c[0] =1;
@@ -158,9 +144,6 @@ Log.d("POST",response);
                 RequestQueue requestQueue = Volley.newRequestQueue(HelpDetail.this);
                 requestQueue.add(request1);
                 requestQueue.add(request);
-                if(c[0]==1){
-                    requestQueue.add(request);
-                }
 
             }
         });
