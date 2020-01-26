@@ -7,12 +7,13 @@
     tools:context=".HelpDetail"
     android:background="@drawable/findmyway">
 
-    <EditText
+    <TextView
         android:id="@+id/Body"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/desti"
         android:paddingLeft="40dp"
+        android:paddingTop="10dp"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.578" />
 
-    <EditText
+    <TextView
         android:id="@+id/Phonenum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.675" />
 
-    <EditText
+    <TextView
         android:id="@+id/Phonenum2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,12 +49,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.757" />
 
-    <EditText
+    <TextView
         android:id="@+id/Phone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/origini"
         android:paddingLeft="40dp"
+        android:paddingTop="10dp"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

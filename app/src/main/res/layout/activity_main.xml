@@ -13,7 +13,7 @@
     <Button android:layout_weight="0.5"
         android:layout_height="wrap_content"
         android:id="@+id/btnDraft"
-        android:background="@drawable/sent"
+        android:background="@drawable/loc"
         android:layout_width="match_parent"></Button>
 </LinearLayout>
 <androidx.recyclerview.widget.RecyclerView android:layout_width="match_parent"
