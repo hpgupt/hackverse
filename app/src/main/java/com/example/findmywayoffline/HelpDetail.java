@@ -20,6 +20,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.util.concurrent.TimeUnit;
+
 public class HelpDetail extends AppCompatActivity {
 
     @Override
@@ -48,7 +50,7 @@ public class HelpDetail extends AppCompatActivity {
         getgps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "https://aimmense-sierra-43855.herokuapp.com/send?msg="+body.substring(31);
+                String url = "https://immense-sierra-43855.herokuapp.com/send?msg="+body.substring(31);
 
                 Log.d("URL",url);
 
@@ -63,10 +65,10 @@ Log.d("POST",response);
 
                     }
                 });
+                final int[] c = {0};
+                String urlres = "https://immense-sierra-43855.herokuapp.com/recv";
 
-                String urlres = "https://afternoon-chamber-99029.herokuapp.com/recv";
-
-                StringRequest request = new StringRequest(StringRequest.Method.GET, urlres, new Response.Listener<String>() {
+                final StringRequest request = new StringRequest(StringRequest.Method.GET, urlres, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
@@ -80,6 +82,7 @@ Log.d("POST",response);
 
                             dir = dir.substring(0,dir.length()-4);
 
+
                             Log.d("ANS",dir);
 
                             String indi[] = dir.split("::");
@@ -89,7 +92,7 @@ Log.d("POST",response);
 
                             int k=0;
 
-                            String sms_res = "";
+                            String sms_res = "Addr: ";
                             while(k<indi.length-1) {
 
 
@@ -97,7 +100,7 @@ Log.d("POST",response);
                                 for (i = k; i < indi.length; i++) {
 
                                     charlen += indi[i].length();
-                                    if (charlen >= 155) {
+                                    if (charlen >= 150) {
                                         charlen -= indi[i].length();
                                         //i--;
                                        // Log.d("SMS1",sms_res);
@@ -133,7 +136,7 @@ Log.d("POST",response);
                                 //SEND SMS
 
 
-                                sms_res = "";
+                                sms_res = "Addr: ";
                                 //int j;
                                 charlen = 0;
 
@@ -141,7 +144,7 @@ Log.d("POST",response);
                             }
 
                         } catch (Exception e) {
-
+                            c[0] =1;
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -154,6 +157,9 @@ Log.d("POST",response);
                 RequestQueue requestQueue = Volley.newRequestQueue(HelpDetail.this);
                 requestQueue.add(request1);
                 requestQueue.add(request);
+                if(c[0]==1){
+                    requestQueue.add(request);
+                }
 
             }
         });

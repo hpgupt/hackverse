@@ -157,7 +157,7 @@ public class MainActivity extends Activity {
         if (val == 2) {
 
             // Create Sent box URI
-            Uri sentURI = Uri.parse("content://sms/sent");
+            Uri sentURI = Uri.parse("content://sms/inbox");
 
             // List required columns
             String[] reqCols = new String[] { "_id", "address", "body" };
@@ -170,6 +170,7 @@ public class MainActivity extends Activity {
             Cursor c = cr.query(sentURI, reqCols, null, null, null);
 
             ArrayList<UserDetails> data = new ArrayList<UserDetails>();
+            ArrayList<String> addr = new ArrayList<>();
 //UserDetails data = null;
             while (c.moveToNext()){
 
@@ -183,7 +184,7 @@ public class MainActivity extends Activity {
 
 //                index = c.getColumnIndexOrThrow("id");
 //                long id = c.getLong(index);
-                if(body.trim().contains("Please send me directions from "))
+                if(body.trim().contains("Addr: "))
                 {
                     String timeStamp = new SimpleDateFormat("yyyy.MM.dd HH.mm.ss").format(new Date());
                     String tm = timeStamp;
