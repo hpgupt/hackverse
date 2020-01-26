@@ -23,7 +23,7 @@ public class Send_sms extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_send_sms);
+        setContentView(R.layout.activity_snd_msg);
         final EditText source = findViewById(R.id.source);
         final EditText dest = findViewById(R.id.dest);
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
