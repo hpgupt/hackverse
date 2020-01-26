@@ -4,18 +4,20 @@
 <LinearLayout android:id="@+id/linearLayout1"
     android:layout_width="match_parent" android:layout_weight="0"
     android:layout_height="wrap_content">
-    <Button android:text="RECIEVED"
+    <Button
         android:id="@+id/btnSentBox"
+        android:background="@drawable/recv"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
         android:layout_width="match_parent"></Button>
     <Button android:layout_weight="0.5"
         android:layout_height="wrap_content"
         android:id="@+id/btnDraft"
-        android:text="SENT"
+        android:background="@drawable/sent"
         android:layout_width="match_parent"></Button>
 </LinearLayout>
 <androidx.recyclerview.widget.RecyclerView android:layout_width="match_parent"
+    android:background="@drawable/findmywayy"
 android:layout_weight="1" android:layout_height="match_parent"
 android:id="@+id/lvMsg"></androidx.recyclerview.widget.RecyclerView>
 
