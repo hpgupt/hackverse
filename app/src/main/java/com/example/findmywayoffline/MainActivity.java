@@ -3,6 +3,8 @@ package com.example.findmywayoffline;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Activity;
@@ -31,10 +33,11 @@ public class MainActivity extends Activity {
 
     Button btnSent, btnInbox, btnDraft;
     TextView lblMsg, lblNo;
-    ListView lvMsg;
+    RecyclerView lvMsg;
     int val = 1;
     // Cursor Adapter
     SimpleCursorAdapter adapter;
+    Adapter ad;
 
     /** Called when the activity is first created. */
     @Override
@@ -85,7 +88,9 @@ public class MainActivity extends Activity {
             }
         });
 
-        lvMsg = (ListView) findViewById(R.id.lvMsg);
+        lvMsg = (RecyclerView) findViewById(R.id.lvMsg);
+        lvMsg.setLayoutManager(new LinearLayoutManager(this));
+
 
     }
     public void onClicker(View v) {
@@ -107,7 +112,8 @@ public class MainActivity extends Activity {
            // Log.d("COUNT",String.valueOf(c.getCount()));
 
 
-            ArrayList<String> data = new ArrayList<String>();
+            ArrayList<UserDetails> data = new ArrayList<UserDetails>();
+            //UserDetails data = null;
 
             while (c.moveToNext()){
 
@@ -121,14 +127,26 @@ public class MainActivity extends Activity {
 
 //                index = c.getColumnIndexOrThrow("id");
 //                long id = c.getLong(index);
+
                 if(body.trim().contains("Please send me directions from "))
-                    data.add(address + "\n" + body);
+                {
+                    String tm = "2:30";
+                    String longi = "2";
+                    String lat = "2";
+                    UserDetails temp = new UserDetails(lat,longi,tm,body,address);
+                    data.add(temp);
+                    if (ad!=null)
+                        ad.notifyDataSetChanged();
+                }
 
             }
+            Log.d("SIZE",String.valueOf(data.size()));
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.activity_list_item,android.R.id.text1,data);
+            //ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.activity_list_item,android.R.id.text1,data);
             // Attached Cursor with adapter and display in listview
-            lvMsg.setAdapter(adapter);
+            Adapter ad = new Adapter(getApplicationContext(),data);
+            lvMsg.setAdapter(ad);
+
 
         }
 
@@ -147,8 +165,8 @@ public class MainActivity extends Activity {
             // Fetch Sent SMS Message from Built-in Content Provider
             Cursor c = cr.query(sentURI, reqCols, null, null, null);
 
-            ArrayList<String> data = new ArrayList<String>();
-
+            ArrayList<UserDetails> data = new ArrayList<UserDetails>();
+//UserDetails data = null;
             while (c.moveToNext()){
 
                 int index;
@@ -162,13 +180,23 @@ public class MainActivity extends Activity {
 //                index = c.getColumnIndexOrThrow("id");
 //                long id = c.getLong(index);
                 if(body.trim().contains("Please send me directions from "))
-                    data.add(address + "\n" + body);
+                {
+                    String tm = "2:30";
+                    String longi = "2";
+                    String lat = "2";
+                    UserDetails temp = new UserDetails(lat,longi,tm,body,address);
+                    data.add(temp);
+                    if (ad!=null)
+                    ad.notifyDataSetChanged();
+                }
 
             }
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.activity_list_item,android.R.id.text1,data);
+            //ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.activity_list_item,android.R.id.text1,data);
             // Attached Cursor with adapter and display in listview
-            lvMsg.setAdapter(adapter);
+            Adapter ad = new Adapter(getApplicationContext(),data);
+            lvMsg.setAdapter(ad);
+
 
 
         }
@@ -187,8 +215,8 @@ public class MainActivity extends Activity {
             // Fetch Sent SMS Message from Built-in Content Provider
             Cursor c = cr.query(draftURI, reqCols, null, null, null);
 
-            ArrayList<String> data = new ArrayList<String>();
-
+            ArrayList<UserDetails> data = new ArrayList<UserDetails>();
+//UserDetails data = null;
             while (c.moveToNext()){
 
                 int index;
@@ -202,13 +230,24 @@ public class MainActivity extends Activity {
 //                index = c.getColumnIndexOrThrow("id");
 //                long id = c.getLong(index);
                 if(body.trim().contains("Please send me directions from "))
-                    data.add(address + "\n" + body);
+                {
+                    String tm = "2:30";
+                    String longi = "2";
+                    String lat = "2";
+                    UserDetails temp = new UserDetails(lat,longi,tm,body,address);
+                    data.add(temp);
+                    if(ad!=null)
+                    ad.notifyDataSetChanged();
+                }
 
             }
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.activity_list_item,android.R.id.text1,data);
+            //ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.activity_list_item,android.R.id.text1,data);
             // Attached Cursor with adapter and display in listview
-            lvMsg.setAdapter(adapter);
+            ad = new Adapter(getApplicationContext(),data);
+            lvMsg.setAdapter(ad);
+
+
 
 
         }
