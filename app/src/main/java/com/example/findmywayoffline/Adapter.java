@@ -45,9 +45,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-   //             Intent i = new Intent(mContext, HelpDetail.class);
-//                i.putExtra("VideoDetails", (Serializable) detail);
-  //              mContext.startActivity(i);
+                Intent i = new Intent(mContext, HelpDetail.class);
+               i.putExtra("Phone", detail.getNumber());
+               i.putExtra("Body",detail.getBody());
+               i.putExtra("Lat",detail.getLat());
+               i.putExtra("Longi",detail.getLongi());
+               i.putExtra("TS",detail.getTimest());
+                mContext.startActivity(i);
             }
         });
 
