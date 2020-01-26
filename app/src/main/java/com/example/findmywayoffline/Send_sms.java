@@ -1,11 +1,12 @@
 package com.example.findmywayoffline;
 
-import androidx.annotation.RequiresApi;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -19,11 +20,12 @@ import android.widget.EditText;
 
 public class Send_sms extends AppCompatActivity {
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_send_sms);
+        setContentView(R.layout.activity_snd_msg);
+        getSupportActionBar().hide();
         final EditText source = findViewById(R.id.source);
         final EditText dest = findViewById(R.id.dest);
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
