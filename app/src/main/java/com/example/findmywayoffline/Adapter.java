@@ -51,6 +51,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
                i.putExtra("Lat",detail.getLat());
                i.putExtra("Longi",detail.getLongi());
                i.putExtra("TS",detail.getTimest());
+
                 mContext.startActivity(i);
             }
         });
