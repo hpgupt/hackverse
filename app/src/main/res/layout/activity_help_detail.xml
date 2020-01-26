@@ -1,45 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HelpDetail">
+    tools:context=".HelpDetail"
+    android:background="@drawable/findmyway">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:id="@+id/Phone"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
+    <EditText
         android:id="@+id/Body"
-        android:layout_below="@+id/Phone"/>
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/desti"
+        android:paddingLeft="40dp"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.578" />
 
-    <TextView
+    <EditText
+        android:id="@+id/Phonenum"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:id="@+id/TS"
-        android:layout_below="@+id/Body"/>
+        android:layout_height="wrap_content"
+        android:background="@drawable/lan"
+        android:paddingLeft="40dp"
+        android:text="12.9951° N"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.675" />
 
-    <TextView
+    <EditText
+        android:id="@+id/Phonenum2"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:id="@+id/Lat"
-        android:layout_below="@+id/TS"/>
+        android:layout_height="wrap_content"
+        android:background="@drawable/lan"
+        android:paddingLeft="40dp"
+        android:text="74.8094° E"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.757" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:id="@+id/Longi"
-        android:layout_below="@+id/Lat"/>
+    <EditText
+        android:id="@+id/Phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/origini"
+        android:paddingLeft="40dp"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.397" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
         android:id="@+id/sendgps"
-        android:layout_below="@+id/Longi"
-        android:text="SEND ROUTE"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/help"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.91" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="188dp"
+        android:layout_height="175dp"
+        android:layout_marginStart="108dp"
+        android:src="@drawable/hlpimg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.026"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.068"
+        tools:srcCompat="@drawable/hlpimg" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="136dp"
+        android:layout_height="41dp"
+        android:fontFamily="@font/secular_one"
+        android:text="YOUR CONTACT"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.324" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="126dp"
+        android:layout_height="36dp"
+        android:fontFamily="@font/secular_one"
+        android:text="NEEDS HELP"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.466" />
+</androidx.constraintlayout.widget.ConstraintLayout>

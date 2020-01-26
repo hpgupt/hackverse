@@ -34,19 +34,15 @@ public class HelpDetail extends AppCompatActivity {
         String longi = i.getStringExtra("Longi");
         String ts = i.getStringExtra("TS");
 
-        TextView phoneNum,tex,lati,lgi,TS;
+        TextView phoneNum,tex;
         phoneNum = findViewById(R.id.Phone);
         tex  = findViewById(R.id.Body);
-        lati= findViewById(R.id.Lat);
-        lgi = findViewById(R.id.Longi);
-        TS = findViewById(R.id.TS);
+
         Button getgps = findViewById(R.id.sendgps);
 
         phoneNum.setText(phone);
         tex.setText(body);
-        lati.setText(lat);
-        lgi.setText(longi);
-        TS.setText(ts);
+
 
         //31-;
         getgps.setOnClickListener(new View.OnClickListener() {
