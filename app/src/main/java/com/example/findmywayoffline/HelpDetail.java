@@ -52,7 +52,7 @@ public class HelpDetail extends AppCompatActivity {
         getgps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "https://afternoon-chamber-99029.herokuapp.com/send?msg="+body.substring(31);
+                String url = "https://aimmense-sierra-43855.herokuapp.com/send?msg="+body.substring(31);
 
                 Log.d("URL",url);
 
@@ -78,7 +78,7 @@ Log.d("POST",response);
                            // Log.d("RESPOBSE",response);
                             JSONObject jsonObject = new JSONObject(response);
 
-                            String  dir = jsonObject.getString("content");
+                            String  dir = jsonObject.getString("directions");
 
                             dir = dir.substring(3);
 
