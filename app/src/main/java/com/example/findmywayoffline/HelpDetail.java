@@ -28,6 +28,7 @@ public class HelpDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_detail);
+        getSupportActionBar().hide();
 
         Intent i =getIntent();
         final String phone = i.getStringExtra("Phone");
