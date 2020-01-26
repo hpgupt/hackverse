@@ -16,12 +16,16 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
@@ -100,11 +104,30 @@ public class MainActivity extends Activity {
 
             // Fetch Inbox SMS Message from Built-in Content Provider
             Cursor c = cr.query(inboxURI, reqCols, null, null, null);
+           // Log.d("COUNT",String.valueOf(c.getCount()));
 
+
+            ArrayList<String> data = new ArrayList<String>();
+
+            while (c.moveToNext()){
+
+                int index;
+
+                index = c.getColumnIndexOrThrow("address");
+                String address = c.getString(index);
+
+                index = c.getColumnIndexOrThrow("body");
+                String body = c.getString(index);
+
+//                index = c.getColumnIndexOrThrow("id");
+//                long id = c.getLong(index);
+                if(body.trim().contains("Please send me directions from "))
+                    data.add(address + "\n" + body);
+
+            }
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.activity_list_item,android.R.id.text1,data);
             // Attached Cursor with adapter and display in listview
-            adapter = new SimpleCursorAdapter(this, R.layout.row, c,
-                    new String[] { "body", "address" }, new int[] {
-                    R.id.lblMsg, R.id.lblNumber });
             lvMsg.setAdapter(adapter);
 
         }
@@ -124,11 +147,29 @@ public class MainActivity extends Activity {
             // Fetch Sent SMS Message from Built-in Content Provider
             Cursor c = cr.query(sentURI, reqCols, null, null, null);
 
+            ArrayList<String> data = new ArrayList<String>();
+
+            while (c.moveToNext()){
+
+                int index;
+
+                index = c.getColumnIndexOrThrow("address");
+                String address = c.getString(index);
+
+                index = c.getColumnIndexOrThrow("body");
+                String body = c.getString(index);
+
+//                index = c.getColumnIndexOrThrow("id");
+//                long id = c.getLong(index);
+                if(body.trim().contains("Please send me directions from "))
+                    data.add(address + "\n" + body);
+
+            }
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.activity_list_item,android.R.id.text1,data);
             // Attached Cursor with adapter and display in listview
-            adapter = new SimpleCursorAdapter(this, R.layout.row, c,
-                    new String[] { "body", "address" }, new int[] {
-                    R.id.lblMsg, R.id.lblNumber });
             lvMsg.setAdapter(adapter);
+
 
         }
 
@@ -146,11 +187,29 @@ public class MainActivity extends Activity {
             // Fetch Sent SMS Message from Built-in Content Provider
             Cursor c = cr.query(draftURI, reqCols, null, null, null);
 
+            ArrayList<String> data = new ArrayList<String>();
+
+            while (c.moveToNext()){
+
+                int index;
+
+                index = c.getColumnIndexOrThrow("address");
+                String address = c.getString(index);
+
+                index = c.getColumnIndexOrThrow("body");
+                String body = c.getString(index);
+
+//                index = c.getColumnIndexOrThrow("id");
+//                long id = c.getLong(index);
+                if(body.trim().contains("Please send me directions from "))
+                    data.add(address + "\n" + body);
+
+            }
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),android.R.layout.activity_list_item,android.R.id.text1,data);
             // Attached Cursor with adapter and display in listview
-            adapter = new SimpleCursorAdapter(this, R.layout.row, c,
-                    new String[] { "body", "address" }, new int[] {
-                    R.id.lblMsg, R.id.lblNumber });
             lvMsg.setAdapter(adapter);
+
 
         }
 

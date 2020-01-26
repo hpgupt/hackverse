@@ -80,7 +80,7 @@ public class Send_sms extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String phoneNo = "+91" + phonenum.getText().toString().trim();
-                String message = source.getText().toString().trim() + " " + dest.getText().toString().trim();
+                String message = "Please send me directions from " + source.getText().toString().trim() + "-" + dest.getText().toString().trim();
 
                 Intent intent=new Intent(getApplicationContext(),Send_sms.class);
                 PendingIntent pi=PendingIntent.getActivity(getApplicationContext(), 0, intent,0);
